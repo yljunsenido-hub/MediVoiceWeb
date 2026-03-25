@@ -6,35 +6,39 @@
         </a>
     </div>
 
-    <table class="w-full border">
-        <thead>
-            <tr class="bg-gray-100">
-                <th class="border p-2">Employee ID</th>
-                <th class="border p-2">First Name</th>
-                <th class="border p-2">Middle Name</th>
-                <th class="border p-2">Last Name</th>
-                <th class="border p-2">Email</th>
-                <th class="border p-2">Contact</th>
-            </tr>
-        </thead>
+    <div class="relative overflow-x-auto bg-white shadow-sm rounded-lg border border-gray-200 mt-4">
+        <table class="w-full text-sm text-left text-gray-700">
+            <thead class="bg-gray-100 border-b border-gray-200">
+                <tr>
+                    <th class="px-6 py-3 font-semibold text-gray-700">Employee ID</th>
+                    <th class="px-6 py-3 font-semibold text-gray-700">First Name</th>
+                    <th class="px-6 py-3 font-semibold text-gray-700">Middle Name</th>
+                    <th class="px-6 py-3 font-semibold text-gray-700">Last Name</th>
+                    <th class="px-6 py-3 font-semibold text-gray-700">Email</th>
+                    <th class="px-6 py-3 font-semibold text-gray-700">Contact</th>
+                </tr>
+            </thead>
 
-        <tbody>
-            @if($nurses)
-            @foreach($nurses as $id => $nurse)
-            <tr>
-                <td class="border p-2 text-center">{{ $nurse['employee_number'] ?? '' }}</td>
-                <td class="border p-2 text-center">{{ $nurse['first_name'] ?? '' }}</td>
-                <td class="border p-2 text-center">{{ $nurse['middle_name'] ?? '' }}</td>
-                <td class="border p-2 text-center">{{ $nurse['last_name'] ?? '' }}</td>
-                <td class="border p-2 text-center">{{ $nurse['email'] ?? '' }}</td>
-                <td class="border p-2 text-center">{{ $nurse['contact'] ?? '' }}</td>
-            </tr>
-            @endforeach
-            @else
-            <tr>
-                <td colspan="3" class="text-center p-4">No nurses found</td>
-            </tr>
-            @endif
-        </tbody>
-    </table>
+            <tbody>
+                @if($nurses)
+                @foreach($nurses as $id => $nurse)
+                @if($nurse) <!-- skip null entries -->
+                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200 hover:bg-gray-100 transition">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ $nurse['employee_number'] ?? '' }}</td>
+                    <td class="px-6 py-4">{{ $nurse['first_name'] ?? '' }}</td>
+                    <td class="px-6 py-4">{{ $nurse['middle_name'] ?? '' }}</td>
+                    <td class="px-6 py-4">{{ $nurse['last_name'] ?? '' }}</td>
+                    <td class="px-6 py-4">{{ $nurse['email'] ?? '' }}</td>
+                    <td class="px-6 py-4">{{ $nurse['contact'] ?? '' }}</td>
+                </tr>
+                @endif
+                @endforeach
+                @else
+                <tr>
+                    <td colspan="6" class="text-center p-4">No nurses found</td>
+                </tr>
+                @endif
+            </tbody>
+        </table>
+    </div>
 </x-app-layout>
