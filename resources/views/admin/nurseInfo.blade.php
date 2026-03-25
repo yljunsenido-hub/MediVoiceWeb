@@ -8,11 +8,13 @@
     <x-profile-info-table
         title="Personal Information"
         :fields="[
+        'Employee No.' => $nurse['employeeNumber'] ?? '',
         'First Name' => $nurse['firstName'] ?? '',
         'Last Name' => $nurse['lastName'] ?? '',
         'Age' => $nurse['age'] ?? '',
         'Contact Number' => $nurse['contactNumber'] ?? '',
         'Role' => $nurse['role'] ?? '',
+        'Shift' => $nurse['shift'] ?? '',
         'Email' => $nurse['email'] ?? '',
     ]" />
 </x-app-layout>

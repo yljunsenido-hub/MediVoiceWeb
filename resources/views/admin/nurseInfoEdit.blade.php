@@ -12,12 +12,14 @@
         <x-profile-info-table-edit
             title="Personal Information"
             :fields="[
-        'firstName' => ['label' => 'First Name', 'value' => $nurse['firstName'] ?? ''],
-        'lastName' => ['label' => 'Last Name', 'value' => $nurse['lastName'] ?? ''],
-        'age' => ['label' => 'Age', 'value' => $nurse['age'] ?? ''],
-        'contactNumber' => ['label' => 'Contact Number', 'value' => $nurse['contactNumber'] ?? ''],
-        'email' => ['label' => 'Email', 'value' => $nurse['email'] ?? ''],
-    ]" />
+                'employeeNumber' => ['label' => 'Employee Number', 'value' => $nurse['employeeNumber'] ?? ''], 
+                'firstName' => ['label' => 'First Name', 'value' => $nurse['firstName'] ?? ''],
+                'lastName' => ['label' => 'Last Name', 'value' => $nurse['lastName'] ?? ''],
+                'age' => ['label' => 'Age', 'value' => $nurse['age'] ?? ''],
+                'contactNumber' => ['label' => 'Contact Number', 'value' => $nurse['contactNumber'] ?? ''],
+                'shift' => ['label' => 'Shift', 'value' => $nurse['shift'] ?? ''],
+                'email' => ['label' => 'Email', 'value' => $nurse['email'] ?? ''],
+            ]" />
         <button type="submit"
             class="mt-2 text-white bg-blue-700 px-4 py-2 rounded-lg font-semibold">
             Update

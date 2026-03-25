@@ -28,6 +28,7 @@ class NurseController extends Controller
             $data = array_filter($data, function ($nurse) use ($search) {
                 return (isset($nurse['firstName']) && stripos($nurse['firstName'], $search) !== false) ||
                     (isset($nurse['lastName']) && stripos($nurse['lastName'], $search) !== false) ||
+                    (isset($nurse['employeeNumber']) && stripos($nurse['employeeNumber'], $search) !== false) ||
                     (isset($nurse['age']) && stripos($nurse['age'], $search) !== false) ||
                     (isset($nurse['contactNumber']) && stripos($nurse['contactNumber'], $search) !== false);
             });
@@ -79,11 +80,13 @@ class NurseController extends Controller
         $database = $this->database();
 
         $database->getReference('Nurse/' . $id)->update([
+            'employeeNumber' => $request->employeeNumber,
             'firstName' => $request->firstName,
             'lastName' => $request->lastName,
             'age' => $request->age,
             'contactNumber' => $request->contactNumber,
             'email' => $request->email,
+            'shift' => $request->shift,
         ]);
 
         return redirect()
