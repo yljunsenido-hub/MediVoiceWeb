@@ -14,6 +14,7 @@
         <x-profile-info-table-edit
             title="Personal Information"
             :fields="[
+            'employeeNumber' => ['label' => 'Employee Number', 'value' => $careGiver['employeeNumber'] ?? ''],
             'firstName' => ['label' => 'First Name', 'value' => $careGiver['firstName'] ?? ''],
             'lastName' => ['label' => 'Last Name', 'value' => $careGiver['lastName'] ?? ''],
             'age' => ['label' => 'Age', 'value' => $careGiver['age'] ?? ''],

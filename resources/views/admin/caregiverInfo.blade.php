@@ -8,6 +8,7 @@
     <x-profile-info-table
         title="Personal Information"
         :fields="[
+        'Employee Number' => $careGiver['employeeNumber'] ?? '',
         'First Name' => $careGiver['firstName'] ?? '',
         'Last Name' => $careGiver['lastName'] ?? '',
         'Age' => $careGiver['age'] ?? '',

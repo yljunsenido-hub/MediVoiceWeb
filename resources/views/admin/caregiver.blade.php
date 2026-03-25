@@ -19,9 +19,12 @@
         <table class="w-full text-sm text-left text-gray-700">
             <thead class="bg-gray-100 border-b border-gray-200">
                 <tr>
+                    <th class="px-6 py-3 font-semibold text-gray-700">Employee Number</th>
                     <th class="px-6 py-3 font-semibold text-gray-700">First Name</th>
                     <th class="px-6 py-3 font-semibold text-gray-700">Last Name</th>
                     <th class="px-6 py-3 font-semibold text-gray-700">Age</th>
+                    <th class="px-6 py-3 font-semibold text-gray-700">Contact Number</th>
+                    <th class="px-6 py-3 font-semibold text-gray-700">Email</th>
                     <th class="px-6 py-3 font-semibold text-gray-700">Shift</th>
                     <th class="px-6 py-3 font-semibold text-gray-700">Action</th>
                 </tr>
@@ -31,6 +34,9 @@
                 @foreach($data as $caregiverId => $caregiver)
                 <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200 hover:bg-gray-100 transition">
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        {{ $caregiver['employeeNumber'] ?? '' }}
+                    </td>
+                    <td class="px-6 py-4">
                         {{ $caregiver['firstName'] ?? '' }}
                     </td>
                     <td class="px-6 py-4">
@@ -38,6 +44,12 @@
                     </td>
                     <td class="px-6 py-4">
                         {{ $caregiver['age'] ?? '' }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $caregiver['contactNumber'] ?? '' }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $caregiver['email'] ?? '' }}
                     </td>
                     <td class="px-6 py-4">
                         {{ $caregiver['shift'] ?? '' }}

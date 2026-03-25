@@ -28,6 +28,7 @@ class CareGiverController extends Controller
             $data = array_filter($data, function ($careGiver) use ($search) {
                 return (isset($careGiver['firstName']) && stripos($careGiver['firstName'], $search) !== false) ||
                     (isset($careGiver['lastName']) && stripos($careGiver['lastName'], $search) !== false) ||
+                    (isset($careGiver['employeeNumber']) && stripos($careGiver['employeeNumber'], $search) !== false) ||
                     (isset($careGiver['age']) && stripos($careGiver['age'], $search) !== false) ||
                     (isset($careGiver['shift']) && stripos($careGiver['shift'], $search) !== false);
             });
@@ -94,6 +95,7 @@ class CareGiverController extends Controller
         $database = $this->database();
 
         $database->getReference('Caregiver/' . $id)->update([
+            'employeeNumber' => $request->employeeNumber,
             'firstName' => $request->firstName,
             'lastName' => $request->lastName,
             'age' => $request->age,
