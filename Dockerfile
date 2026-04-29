@@ -17,6 +17,8 @@ RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html/storage
 
+RUN chmod -R 777 storage bootstrap/cache
+
 RUN a2enmod rewrite
 
 EXPOSE 80
