@@ -29,6 +29,18 @@ ENV PORT=10000
 RUN sed -i "s/80/${PORT}/g" /etc/apache2/ports.conf
 RUN sed -i "s/80/${PORT}/g" /etc/apache2/sites-available/000-default.conf
 
+# Install Node.js
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs
+
+# Install JS dependencies
+RUN npm install
+
+# Build Vite assets
+RUN npm run build
+
 EXPOSE 10000
+
+
 
 CMD ["apache2-foreground"]
