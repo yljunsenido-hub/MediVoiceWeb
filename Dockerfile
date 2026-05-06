@@ -33,6 +33,8 @@ RUN sed -i "s/80/${PORT}/g" /etc/apache2/sites-available/000-default.conf
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
     && apt-get install -y nodejs
 
+RUN chmod -R 755 /etc/secrets || true
+
 # Install JS dependencies
 RUN npm install
 
