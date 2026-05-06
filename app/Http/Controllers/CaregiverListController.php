@@ -9,11 +9,12 @@ class CaregiverListController extends Controller
 {
     private function database()
     {
-        $factory = (new Factory)
-            ->withServiceAccount(storage_path('app/firebase/medivoice-92430-firebase-adminsdk-fbsvc-2900475cf8.json'))
-            ->withDatabaseUri('https://medivoice-92430-default-rtdb.firebaseio.com');
+        $firebaseCredentials = json_decode(env('FIREBASE_CREDENTIALS'), true);
 
-        return $factory->createDatabase();
+        return (new Factory)
+            ->withServiceAccount($firebaseCredentials)
+            ->withDatabaseUri('https://medivoice-92430-default-rtdb.firebaseio.com')
+            ->createDatabase();
     }
 
     public function getCaregiverLists()

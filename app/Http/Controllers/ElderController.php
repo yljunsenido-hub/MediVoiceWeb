@@ -9,8 +9,10 @@ class ElderController extends Controller
 {
     private function database()
     {
+        $firebaseCredentials = json_decode(env('FIREBASE_CREDENTIALS'), true);
+
         return (new Factory)
-            ->withServiceAccount(storage_path('app/firebase/medivoice-92430-firebase-adminsdk-fbsvc-2900475cf8.json'))
+            ->withServiceAccount($firebaseCredentials)
             ->withDatabaseUri('https://medivoice-92430-default-rtdb.firebaseio.com')
             ->createDatabase();
     }

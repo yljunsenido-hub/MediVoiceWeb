@@ -9,7 +9,7 @@ class DashboardController extends Controller
     public function getUsers()
     {
         $factory = (new Factory)
-            ->withServiceAccount(storage_path('app/firebase/medivoice-92430-firebase-adminsdk-fbsvc-2900475cf8.json'))
+            ->withServiceAccount('/etc/secrets/firebase.json')
             ->withDatabaseUri('https://medivoice-92430-default-rtdb.firebaseio.com');
 
         $database = $factory->createDatabase();
@@ -24,41 +24,16 @@ class DashboardController extends Controller
         $totalNurse = count($nurse);
         $totalNotes = count($notes);
 
-        /*
-        |--------------------------------------------------------------------------
-        | Chart Data Containers
-        |--------------------------------------------------------------------------
-        */
-
         $notesByDate = [];
         $observationsByDate = [];
         $prescriptionsByDate = [];
 
-        /*
-        |--------------------------------------------------------------------------
-        | Running Notes Chart Aggregation
-        |--------------------------------------------------------------------------
-        */
-
         foreach ($notes as $note) {
-
             if (!empty($note['timestamp'])) {
-
                 $date = date('Y-m-d', strtotime($note['timestamp']));
-
-                if (!isset($notesByDate[$date])) {
-                    $notesByDate[$date] = 0;
-                }
-
-                $notesByDate[$date]++;
+                $notesByDate[$date] = ($notesByDate[$date] ?? 0) + 1;
             }
         }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Caregiver Observations + Prescriptions Aggregation
-        |--------------------------------------------------------------------------
-        */
 
         $totalObservations = 0;
         $totalPrescriptions = 0;
@@ -66,59 +41,31 @@ class DashboardController extends Controller
         foreach ($caregivers as $caregiver) {
 
             if (!empty($caregiver['Observations'])) {
-
                 foreach ($caregiver['Observations'] as $observation) {
-
                     $totalObservations++;
 
                     if (!empty($observation['timestamp'])) {
-
                         $date = date('Y-m-d', strtotime($observation['timestamp']));
-
-                        if (!isset($observationsByDate[$date])) {
-                            $observationsByDate[$date] = 0;
-                        }
-
-                        $observationsByDate[$date]++;
+                        $observationsByDate[$date] = ($observationsByDate[$date] ?? 0) + 1;
                     }
                 }
             }
 
             if (!empty($caregiver['Prescriptions'])) {
-
                 foreach ($caregiver['Prescriptions'] as $prescription) {
-
                     $totalPrescriptions++;
 
                     if (!empty($prescription['timestamp'])) {
-
                         $date = date('Y-m-d', strtotime($prescription['timestamp']));
-
-                        if (!isset($prescriptionsByDate[$date])) {
-                            $prescriptionsByDate[$date] = 0;
-                        }
-
-                        $prescriptionsByDate[$date]++;
+                        $prescriptionsByDate[$date] = ($prescriptionsByDate[$date] ?? 0) + 1;
                     }
                 }
             }
         }
 
-        /*
-        |--------------------------------------------------------------------------
-        | Sort Chart Data
-        |--------------------------------------------------------------------------
-        */
-
         ksort($prescriptionsByDate);
         ksort($observationsByDate);
         ksort($notesByDate);
-
-        /*
-        |--------------------------------------------------------------------------
-        | Chart Labels + Dataset
-        |--------------------------------------------------------------------------
-        */
 
         $prescriptionLabels = array_keys($prescriptionsByDate);
         $prescriptionData = array_values($prescriptionsByDate);
