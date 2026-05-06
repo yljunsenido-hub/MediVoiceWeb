@@ -9,7 +9,7 @@ class DashboardController extends Controller
     public function getUsers()
     {
         $factory = (new Factory)
-            ->withServiceAccount('/etc/secrets/firebase.json')
+            ->withServiceAccount(storage_path('app/firebase/firebase.json'))
             ->withDatabaseUri('https://medivoice-92430-default-rtdb.firebaseio.com');
 
         $database = $factory->createDatabase();

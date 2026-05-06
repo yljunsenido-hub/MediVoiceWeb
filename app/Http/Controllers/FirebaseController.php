@@ -11,7 +11,7 @@ class FirebaseController extends Controller
         $firebaseCredentials = json_decode(env('FIREBASE_CREDENTIALS'), true);
 
         $factory = (new Factory)
-            ->withServiceAccount($firebaseCredentials)
+            ->withServiceAccount(storage_path('app/firebase/firebase.json'))
             ->withDatabaseUri('https://medivoice-92430-default-rtdb.firebaseio.com');
 
         $database = $factory->createDatabase();

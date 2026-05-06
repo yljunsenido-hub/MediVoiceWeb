@@ -10,7 +10,7 @@ class EmployeeRequestController extends Controller
     private function firebase()
     {
         return (new Factory)
-            ->withServiceAccount('/etc/secrets/firebase.json')
+            ->withServiceAccount(storage_path('app/firebase/firebase.json'))
             ->withDatabaseUri('https://medivoice-92430-default-rtdb.firebaseio.com');
     }
 

@@ -10,7 +10,7 @@ class ElderInfoController extends Controller
     public function elderInfo($id)
     {
         $factory = (new Factory)
-            ->withServiceAccount('/etc/secrets/firebase.json')
+            ->withServiceAccount(storage_path('app/firebase/firebase.json'))
             ->withDatabaseUri('https://medivoice-92430-default-rtdb.firebaseio.com');
 
         $database = $factory->createDatabase();
